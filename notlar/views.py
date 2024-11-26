@@ -8,22 +8,22 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def not_ekle(request):
     if request.method == "POST":
-        form = NoteForm(request.POST, request.FILES)
+        form = NoteForm(request.POST, request.FILES)  # Formdan gelen veriyi al
         if form.is_valid():
-            form.save()  # Veriyi veritabanına kaydet
-            return redirect(
-                "not_ekle"
-            )  # Form gönderildikten sonra yeniden aynı sayfaya yönlendirme
+            note = form.save(commit=False)  # Henüz veritabanına kaydetme
+            note.user = request.user  # Giriş yapan kullanıcıyı ata
+            note.save()  # Veritabanına kaydet
+            return redirect("view_notes")  # Not listesi sayfasına yönlendir
     else:
         form = NoteForm()
-
     return render(request, "not_ekle.html", {"form": form})
 
 
 def notlari_listele(request):
-    notlar = Note.objects.all()
+    notlar = Note.objects.filter(user=request.user)
     return render(request, "not_listele.html", {"notlar": notlar})
 
 
