@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Sayfanızın kısa açıklaması.">
+        <meta name="keywords" content="anahtar kelime 1, anahtar kelime 2, anahtar kelime 3, anahtar kelime 4">
+        <title>Sayfa Başlığı</title>
+    </head>  
+    <body>
+        <h2>Kayıt Ol</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Kayıt Ol</button>
+        </form>
+    </body>
+</html>

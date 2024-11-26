@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Sayfanızın kısa açıklaması.">
+        <meta name="keywords"
+              content="anahtar kelime 1, anahtar kelime 2, anahtar kelime 3, anahtar kelime 4">
+        <title>Sayfa Başlığı</title>
+    </head>
+<body>
+    <h1>Notu Düzenle</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Güncelle</button>
+    </form>
+    <a href="{% url 'view_notes' %}">Notlar Sayfasına Geri Dön</a>
+</body>
+</html>
