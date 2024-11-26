@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from .models import Note
-from .forms import NoteForm
-from django.contrib.auth import authenticate, login, logout
+from .forms import NoteForm, UserRegistrationForm
 from django.contrib import messages
-from .forms import UserRegistrationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import CustomUserChangeForm
 
 
 @login_required
@@ -100,3 +102,38 @@ def view_notes(request):
         user=request.user
     )  # Giriş yapan kullanıcıya ait notları filtrele
     return render(request, "view_notes.html", {"notes": notes})
+
+
+@login_required
+def profile_view(request):
+    """Kullanıcının profilini görüntüleme."""
+    return render(request, "profile_view.html")
+
+
+@login_required
+def edit_profile(request):
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("profile")
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+
+    return render(request, "edit_profile.html", {"form": form})
+
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(
+                request, form.user
+            )  # Kullanıcı girişinin geçerliliğini korur
+            return redirect("profile")  # Profil sayfasına yönlendir
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(request, "change_password.html", {"form": form})

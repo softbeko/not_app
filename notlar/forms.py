@@ -25,3 +25,24 @@ class UserRegistrationForm(forms.ModelForm):
         if password != password_confirm:
             raise forms.ValidationError("Şifreler uyuşmuyor.")
         return cleaned_data
+
+
+class CustomUserChangeForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = [
+            "first_name",
+            "last_name",
+            "username",
+            "password",
+        ]  # Sadece bu alanlar düzenlenecek
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.set_password(
+                self.cleaned_data["password"]
+            )  # Şifreyi hashleyerek kaydediyoruz
+            user.save()
+        return user
