@@ -1,0 +1,36 @@
+<!-- templates/includes/slider.html -->
+{% load static %}
+<div class="container-fluid">
+    <div class="row align-items-center">
+        <!-- Resim Bölümü -->
+        <!-- Metin Bölümü -->
+        <div class="col-md-6">
+            <h1 class="display-4 fw-bold">Bütün Notlarınız Tek Bir Yerde!</h1>
+            {% if user.is_authenticated %}
+                <!-- Eğer kullanıcı giriş yapmışsa -->
+                <p>Hoşgeldiniz, {{ user.username }}!</p>
+            {% else %}
+                <p class="lead">
+                    <!-- Eğer kullanıcı giriş yapmamışsa -->
+                    Dijital notlarınızı organize edin, kolayca erişin ve paylaşın. Hızlı ve güvenli erişim ile notlarınızı her zaman yanınızda taşıyın.
+                </p>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <!-- Eğer kullanıcı giriş yapmışsa -->
+                <p>Hoşgeldiniz, {{ user.username }}! Giriş yaptınız.</p>
+                <a href="{% url 'logout' %}">Çıkış Yap</a>
+            {% else %}
+                <!-- Eğer kullanıcı giriş yapmamışsa -->
+                <a href="{% url 'login' %}" class="btn btn-danger">Giriş Yap</a>
+                <a href="{% url 'register' %}" class="btn btn-primary">Hızlıca Kaydolun</a>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <img width="auto"
+                 height="auto"
+                 src="{% static 'images/slider.png' %}"
+                 alt="Slider Resmi"
+                 class="img-fluid rounded">
+        </div>
+    </div>
+</div>

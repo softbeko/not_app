@@ -137,3 +137,9 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
 
     return render(request, "change_password.html", {"form": form})
+
+
+# Not Listele
+def not_listele(request):
+    notlar = Note.objects.all()
+    return render(request, "not_listele.html", {"notlar": notlar})

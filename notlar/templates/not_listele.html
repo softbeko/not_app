@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Sayfanızın kısa açıklaması.">
-        <meta name="keywords"
-              content="anahtar kelime 1, anahtar kelime 2, anahtar kelime 3, anahtar kelime 4">
-        <title>Sayfa Başlığı</title>
-    </head>
-    <body>
-        <h1>Kayıtlı Notlar</h1>
-        <ul>
-            {% for not in notlar %}
-                <li>
-                    {{ not.title }} -
-                    {% if not.file %}
-                        <a href="{{ not.file.url }}" target="_blank">İndir</a>
-                    {% else %}
-                        <span>Dosya yok</span>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Kayıtlı Notlar{% endblock %}
+
+{% block content %}
+    <h1>Kayıtlı Notlar</h1>
+    <ul>
+        {% for not in notlar %}
+            <li>
+                <strong>{{ not.title }}</strong> - {{ not.content }}
+                {% if not.file %}
+                    <a href="{{ not.file.url }}" target="_blank">İndir</a>
+                {% else %}
+                    <span>Dosya yok</span>
+                {% endif %}
+                
+                <!-- Düzenle ve Sil Bağlantıları -->
+                <a href="{% url 'update_note' not.pk %}">Düzenle</a>
+                <a href="{% url 'delete_note' not.pk %}">Sil</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'not_ekle' %}" class="btn btn-primary mt-3">Yeni Not Ekle</a>
+{% endblock %}
