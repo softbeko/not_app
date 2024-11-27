@@ -1,16 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Not Ekle</title>
-    </head>
-    <body>
-        <h1>Not Ekle</h1>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Kaydet</button>
-        </form>
-    </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Notu Düzenle
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center"
+             style="min-height: 100vh">
+            <!-- Sol Taraf: Resim -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{% static 'images/boys.png' %}"
+                     width="auto"
+                     height="auto"
+                     alt="Not Resmi"
+                     class="img-fluid rounded shadow-lg rounded-5">
+            </div>
+            <!-- Sağ Taraf: Form -->
+            <div class="col-md-6">
+                <div class="card shadow-lg p-4">
+                    <h1 class="text-center mb-4" style="color: #1f5692;">Not Ekle</h1>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- Başlık Alanı -->
+                        <div class="mb-3">
+                            <label for="id_title" class="form-label">Başlık:</label>
+                            <input type="text"
+                                   name="title"
+                                   id="id_title"
+                                   class="form-control"
+                                   maxlength="100"
+                                   required>
+                        </div>
+                        <!-- İçerik Alanı -->
+                        <div class="mb-3">
+                            <label for="id_content" class="form-label">İçerik:</label>
+                            <textarea name="content" id="id_content" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <!-- PDF Yükleme Alanı -->
+                        <div class="mb-3">
+                            <label for="id_file" class="form-label">PDF Yükleyin:</label>
+                            <input type="file" name="file" id="id_file" class="form-control">
+                        </div>
+                        <!-- Kaydet Butonu -->
+                        <button type="submit" class="btn btn-primary w-100 py-2">Kaydet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

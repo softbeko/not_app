@@ -1,20 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Sayfanızın kısa açıklaması.">
-        <meta name="keywords"
-              content="anahtar kelime 1, anahtar kelime 2, anahtar kelime 3, anahtar kelime 4">
-        <title>Sayfa Başlığı</title>
-    </head>
-<body>
-    <h1>Notu Düzenle</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Güncelle</button>
-    </form>
-    <a href="{% url 'view_notes' %}">Notlar Sayfasına Geri Dön</a>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Notu Düzenle
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center"
+             style="min-height: 100vh;">
+            <!-- Sol Taraf: Resim -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{% static 'images/boys2.png' %}"
+                     class="img-fluid rounded shadow-lg rounded-5"
+                     alt="Not Resmi">
+            </div>
+
+            <!-- Sağ Taraf: Form -->
+            <div class="col-md-6">
+                <div class="card shadow-lg p-4">
+                    <h1 class="text-center mb-4" style="color: #1f5692;">Notu Düzenle</h1>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <!-- Başlık Alanı -->
+                        <div class="mb-3">
+                            <label for="id_title" class="form-label">Başlık:</label>
+                            <input type="text"
+                                   name="title"
+                                   id="id_title"
+                                   class="form-control"
+                                   value="{{ form.title.value }}"
+                                   maxlength="100"
+                                   required>
+                        </div>
+
+                        <!-- İçerik Alanı -->
+                        <div class="mb-3">
+                            <label for="id_content" class="form-label">İçerik:</label>
+                            <textarea name="content" id="id_content" class="form-control" rows="5" required>{{ form.content.value }}</textarea>
+                        </div>
+
+                        <!-- PDF Yükleme Alanı -->
+                        <div class="mb-3">
+                            <label for="id_file" class="form-label">PDF Yükleyin:</label>
+                            <input type="file" name="file" id="id_file" class="form-control">
+                            {% if form.file.value %}
+                                <small class="text-muted mt-2 d-block">Mevcut dosya: <a href="{{ form.file.value.url }}" target="_blank">İndir</a></small>
+                            {% endif %}
+                        </div>
+
+                        <!-- Güncelle Butonu -->
+                        <button type="submit" class="btn btn-primary w-100 py-2">Güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Geri Dön Butonu -->
+        <div class="text-center mt-3">
+            <a href="{% url 'view_notes' %}" class="btn btn-secondary">Notlar Sayfasına Geri Dön</a>
+        </div>
+    </div>
+{% endblock content %}
