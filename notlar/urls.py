@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 from django.contrib.auth.views import LoginView
+from .views import custom_logout
 
 
 urlpatterns = [
@@ -11,7 +12,7 @@ urlpatterns = [
     path("login/", views.login_view, name="login"),
     path("", views.home, name="index"),
     path("", views.home, name="home"),
-    path("logout/", views.logout_view, name="logout"),
+    path("logout/", custom_logout, name="logout"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("notes/", views.view_notes, name="view_notes"),  # Notları listeleme
     path("notes/<int:pk>/update/", views.update_note, name="update_note"),

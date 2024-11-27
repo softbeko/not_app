@@ -5,28 +5,37 @@
         <!-- Resim Bölümü -->
         <!-- Metin Bölümü -->
         <div class="col-md-6">
-            <h1 class="display-4 fw-bold">Bütün Notlarınız Tek Bir Yerde!</h1>
-            {% if user.is_authenticated %}
-                <!-- Eğer kullanıcı giriş yapmışsa -->
-                <p>Hoşgeldiniz, {{ user.username }}!</p>
-            {% else %}
-                <p class="lead">
-                    <!-- Eğer kullanıcı giriş yapmamışsa -->
+            <h1 class="display-4 fw-bold">
+                {% if user.is_authenticated %}
+                    Hoşgeldiniz, {{ user.first_name }}!
+                {% else %}
+                    Bütün Notlarınız Tek Bir Yerde!
+                {% endif %}
+            </h1>
+            <p class="lead">
+                {% if user.is_authenticated %}
+                    Dijital notlarınızı kolayca organize edin, her an ve her yerden erişin. Hızlı ve güvenli sistemimizle notlarınıza her zaman ulaşabilir, paylaşabilirsiniz.
+                {% else %}
                     Dijital notlarınızı organize edin, kolayca erişin ve paylaşın. Hızlı ve güvenli erişim ile notlarınızı her zaman yanınızda taşıyın.
-                </p>
-            {% endif %}
-            {% if user.is_authenticated %}
-                <!-- Eğer kullanıcı giriş yapmışsa -->
-                <p>Hoşgeldiniz, {{ user.username }}! Giriş yaptınız.</p>
-                <a href="{% url 'logout' %}">Çıkış Yap</a>
-            {% else %}
-                <!-- Eğer kullanıcı giriş yapmamışsa -->
-                <a href="{% url 'login' %}" class="btn btn-danger">Giriş Yap</a>
-                <a href="{% url 'register' %}" class="btn btn-primary">Hızlıca Kaydolun</a>
-            {% endif %}
+                {% endif %}
+            </p>
+            <a href="{% if user.is_authenticated %}{% url 'not_ekle' %}{% else %}{% url 'login' %}{% endif %}" class="btn btn-danger">
+                {% if user.is_authenticated %}
+                    Not Ekle
+                {% else %}
+                    Hemen Giriş Yapın
+                {% endif %}
+            </a>
+            <a href="{% if user.is_authenticated %}{% url 'notlar' %}{% else %}{% url 'register' %}{% endif %}" class="btn btn-primary">
+                {% if user.is_authenticated %}
+                    Notlarınızı Görüntüleyin
+                {% else %}
+                    Hızlıca Kaydolun
+                {% endif %}
+            </a>
         </div>
         <div class="col-md-6">
-            <img width="auto"
+            <img width="100%"
                  height="auto"
                  src="{% static 'images/slider.png' %}"
                  alt="Slider Resmi"

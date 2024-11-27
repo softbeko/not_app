@@ -143,3 +143,8 @@ def change_password(request):
 def not_listele(request):
     notlar = Note.objects.all()
     return render(request, "not_listele.html", {"notlar": notlar})
+
+
+def custom_logout(request):
+    logout(request)  # Kullanıcıyı oturumdan çıkar
+    return redirect("/")  # Ana sayfaya yönlendir
