@@ -1,6 +1,7 @@
 from django import forms
 from .models import Note
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
 
 
 class NoteForm(forms.ModelForm):
@@ -22,28 +23,19 @@ class UserRegistrationForm(forms.ModelForm):
         password = cleaned_data.get("password")
         password_confirm = cleaned_data.get("password_confirm")
 
+
         if password != password_confirm:
             raise forms.ValidationError("Şifreler uyuşmuyor.")
         return cleaned_data
 
 
-class CustomUserChangeForm(forms.ModelForm):
-
+class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = User
-        fields = [
-            "first_name",
-            "last_name",
-            "username",
-            "password",
-            "email",
-        ]  # Sadece bu alanlar düzenlenecek
+        fields = ["first_name", "last_name", "username", "email", "password"]
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        if commit:
-            user.set_password(
-                self.cleaned_data["password"]
-            )  # Şifreyi hashleyerek kaydediyoruz
-            user.save()
-        return user
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Her alana 'form-control' sınıfı ekliyoruz
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"

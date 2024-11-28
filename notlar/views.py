@@ -18,7 +18,7 @@ def not_ekle(request):
             note = form.save(commit=False)  # Henüz veritabanına kaydetme
             note.user = request.user  # Giriş yapan kullanıcıyı ata
             note.save()  # Veritabanına kaydet
-            return redirect("view_notes")  # Not listesi sayfasına yönlendir
+            return redirect("notlari_listele")  # Not listesi sayfasına yönlendir
     else:
         form = NoteForm()
     return render(request, "not_ekle.html", {"form": form})
@@ -129,10 +129,15 @@ def change_password(request):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Şifreniz başarıyla güncellenmiştir!")
             update_session_auth_hash(
                 request, form.user
             )  # Kullanıcı girişinin geçerliliğini korur
             return redirect("profile")  # Profil sayfasına yönlendir
+        else:
+            messages.error(
+                request, "Şifre değiştirilirken bir hata oluştu. Lütfen tekrar deneyin."
+            )
     else:
         form = PasswordChangeForm(request.user)
 
@@ -148,3 +153,13 @@ def not_listele(request):
 def custom_logout(request):
     logout(request)  # Kullanıcıyı oturumdan çıkar
     return redirect("/")  # Ana sayfaya yönlendir
+
+
+def password_change(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()  # Şifreyi kaydet
+            update_session_auth_hash(request, form.user)  # Oturum güncelle
+            messages.success(request, "Şifreniz başarıyla değiştirildi!")
+            return redirect("profile")

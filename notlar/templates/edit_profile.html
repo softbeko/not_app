@@ -1,20 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Sayfanızın kısa açıklaması.">
-        <meta name="keywords"
-              content="anahtar kelime 1, anahtar kelime 2, anahtar kelime 3, anahtar kelime 4">
-        <title>Sayfa Başlığı</title>
-    </head>
-    <body>
-        <h1>Profilinizi Düzenleyin</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Profili Güncelle</button>
-        </form>
-        <a href="{% url 'profile' %}">Profilime Geri Dön</a>
-    </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Profilinizi Düzenleyin
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center"
+             style="min-height: 100vh">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{% static 'images/women2.png' %}"
+                     width="auto"
+                     height="auto"
+                     alt="Not Resmi"
+                     class="img-fluid rounded shadow-lg rounded-5">
+            </div>
+            <div class="col-md-6">
+                <h1 class="text-center mb-4" style="color: #1f5692;">Profilinizi Düzenleyin</h1>
+                <form method="post" class="card shadow-lg p-4">
+                    {% csrf_token %}
+                    <!-- Form Alanları -->
+                    <div class="form-group mb-3">
+                        <label for="id_first_name">Ad</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_last_name">Soyad</label>
+                        {{ form.last_name }}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_username">Kullanıcı Adı</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_email">E-posta</label>
+                        {{ form.email }}
+                    </div>
+                    <!-- Şifre Linki -->
+                    <div class="form-group mb-4">
+                        <label for="id_password">Şifre</label>
+                        <p>
+                            <a href="{% url 'change_password' %}">Şifrenizi değiştirmek için tıklayın</a>
+                        </p>
+                    </div>
+                    <!-- Güncelleme Butonu -->
+                    <button type="submit" class="btn btn-primary w-100 py-2">Profili Güncelle</button>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="{% url 'profile' %}" class="btn btn-link">Profilime Geri Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
