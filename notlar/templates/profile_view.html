@@ -1,21 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Sayfanızın kısa açıklaması.">
-        <meta name="keywords"
-              content="anahtar kelime 1, anahtar kelime 2, anahtar kelime 3, anahtar kelime 4">
-        <title>Sayfa Başlığı</title>
-    </head>
-    <body>
-        <h1>Profil Bilgileri</h1>
-        <p>
-            <strong>Ad:</strong> {{ user.first_name }}
-        </p>
-        <p>
-            <strong>E-posta:</strong> {{ user.email }}
-        </p>
-        <a href="{% url 'edit_profile' %}">Profili Düzenle</a>
-    </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Profilim
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center"
+             style="min-height: 100vh">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{% static 'images/dad.png' %}"
+                     width="auto"
+                     height="auto"
+                     alt="Not Resmi"
+                     class="img-fluid rounded shadow-lg rounded-5">
+            </div>
+            <div class="col-md-6">
+                <!-- Profil Bilgileri Kartı -->
+                <div class="card shadow-lg p-4">
+                    <h1 class="text-center mb-4" style="color: #1f5692;">Profil Bilgileri</h1>
+                    <!-- Profil Bilgileri Tablosu -->
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <!-- Ad -->
+                            <tr>
+                                <th>Ad</th>
+                                <td>{{ user.first_name }}</td>
+                            </tr>
+                            <!-- Soyad -->
+                            <tr>
+                                <th>Soyad</th>
+                                <td>{{ user.last_name }}</td>
+                            </tr>
+                            <!-- E-posta -->
+                            <tr>
+                                <th>E-posta</th>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <!-- Üyelik Tarihi -->
+                            <tr>
+                                <th>Üyelik Tarihi</th>
+                                <td>{{ user.date_joined|date:"d F Y" }}</td>
+                            </tr>
+                            <!-- Profil Fotoğrafı -->
+                            <!-- Not Sayısı -->
+                            <tr>
+                                <th>Paylaşılan Not Sayısı</th>
+                                <td>{{ user.note_set.count }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Profili Düzenleme Bağlantısı -->
+                    <div class="text-center">
+                        <a href="{% url 'edit_profile' %}" class="btn btn-primary w-100 py-2">Profili Düzenle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

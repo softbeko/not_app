@@ -36,6 +36,7 @@ class CustomUserChangeForm(forms.ModelForm):
             "last_name",
             "username",
             "password",
+            "email",
         ]  # Sadece bu alanlar düzenlenecek
 
     def save(self, commit=True):
