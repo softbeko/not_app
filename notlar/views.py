@@ -18,7 +18,8 @@ def not_ekle(request):
             note = form.save(commit=False)  # Henüz veritabanına kaydetme
             note.user = request.user  # Giriş yapan kullanıcıyı ata
             note.save()  # Veritabanına kaydet
-            return redirect("notlari_listele")  # Not listesi sayfasına yönlendir
+            notlar = Note.objects.all()
+            return render(request, "not_listele.html", {"notlar": notlar})
     else:
         form = NoteForm()
     return render(request, "not_ekle.html", {"form": form})
@@ -33,9 +34,22 @@ def register(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
+            # Formdan gelen verileri alıyoruz
             username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            User.objects.create_user(username=username, password=password)
+            password = form.cleaned_data["password1"]
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
+            email = form.cleaned_data["email"]
+
+            # Kullanıcıyı oluşturuyoruz
+            User.objects.create_user(
+                username=username,
+                password=password,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+            )
+
             messages.success(request, "Kayıt başarılı!")
             return redirect("login")
     else:
@@ -80,7 +94,10 @@ def update_note(request, pk):
         )  # Var olan notu düzenle
         if form.is_valid():
             form.save()
-            return redirect("view_notes")  # Notlar sayfasına yönlendir
+            notlar = Note.objects.all()
+            return render(
+                request, "not_listele.html", {"notlar": notlar}
+            )  # Notlar sayfasına yönlendir
     else:
         form = NoteForm(instance=note)  # Var olan notun içeriği formda
     return render(request, "update_note.html", {"form": form})
@@ -92,7 +109,8 @@ def delete_note(request, pk):
     note = get_object_or_404(Note, pk=pk, user=request.user)
     if request.method == "POST":  # Sadece "POST" isteği ile silinebilir
         note.delete()
-        return redirect("view_notes")  # Notlar sayfasına yönlendir
+        notlar = Note.objects.all()
+        return render(request, "not_listele.html", {"notlar": notlar})
     return render(request, "delete_note.html", {"note": note})
 
 
@@ -107,7 +125,9 @@ def view_notes(request):
 @login_required
 def profile_view(request):
     """Kullanıcının profilini görüntüleme."""
-    return render(request, "profile_view.html")
+    user = request.user  # Giriş yapan kullanıcıyı al
+    return render(request, "profile_view.html", {"user": user})
+    # Kullanıcı bilgilerini şablona gönder
 
 
 @login_required
@@ -151,6 +171,7 @@ def not_listele(request):
 
 
 def custom_logout(request):
+
     logout(request)  # Kullanıcıyı oturumdan çıkar
     return redirect("/")  # Ana sayfaya yönlendir
 

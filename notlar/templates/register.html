@@ -1,18 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Sayfanızın kısa açıklaması.">
-        <meta name="keywords" content="anahtar kelime 1, anahtar kelime 2, anahtar kelime 3, anahtar kelime 4">
-        <title>Sayfa Başlığı</title>
-    </head>  
-    <body>
-        <h2>Kayıt Ol</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Kayıt Ol</button>
-        </form>
-    </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Kayıt Ol
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center"
+             style="min-height: 100vh">
+            <!-- Görsel Bölümü -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{% static 'images/slide.png' %}"
+                     width="auto"
+                     height="auto"
+                     alt="Kayıt Ol Görseli"
+                     class="img-fluid rounded shadow-lg rounded-5">
+            </div>
+            <!-- Form Bölümü -->
+            <div class="col-md-6">
+                <h1 class="text-center mb-4" style="color: #1f5692;">Kayıt Ol</h1>
+                <form method="post" class="card shadow-lg p-4">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="id_first_name" class="form-label">Ad</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_last_name" class="form-label">Soyad</label>
+                        {{ form.last_name }}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_username" class="form-label">Kullanıcı Adı</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_email" class="form-label">E-posta</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_password1" class="form-label">Şifre</label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_password2" class="form-label">Şifre (Tekrar)</label>
+                        {{ form.password2 }}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2">Kayıt Ol</button>
+                </form>
+                <div class="text-center mt-3">
+                    <p>
+                        Zaten bir hesabınız var mı?
+                        <a href="{% url 'login' %}" class="btn btn-link">Giriş Yap</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
