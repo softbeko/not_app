@@ -19,20 +19,24 @@
                     Dijital notlarınızı organize edin, kolayca erişin ve paylaşın. Hızlı ve güvenli erişim ile notlarınızı her zaman yanınızda taşıyın.
                 {% endif %}
             </p>
-            <a href="{% if user.is_authenticated %}{% url 'not_ekle' %}{% else %}{% url 'login' %}{% endif %}" class="btn btn-danger">
+            <a href="{% if user.is_authenticated %}{% url 'not_ekle' %}{% else %}{% url 'login' %}{% endif %}"
+               class="btn btn-danger">
                 {% if user.is_authenticated %}
                     Not Ekle
                 {% else %}
                     Hemen Giriş Yapın
                 {% endif %}
             </a>
-            <a href="{% if user.is_authenticated %}{% url 'notlar' %}{% else %}{% url 'register' %}{% endif %}" class="btn btn-primary">
+            <a href="{% if user.is_authenticated %}{% url 'notlar' %}{% else %}{% url 'shared_notes' %}{% endif %}"
+               class="btn btn-primary">
                 {% if user.is_authenticated %}
-                    Notlarınızı Görüntüleyin
+                    Notlarınızı Görüntüle
                 {% else %}
-                    Hızlıca Kaydolun
+                Tüm Notları Görüntüle
                 {% endif %}
             </a>
+            
+
         </div>
         <div class="col-md-6">
             <img width="100%"

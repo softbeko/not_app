@@ -36,6 +36,10 @@
                             <label for="id_content" class="form-label">İçerik:</label>
                             <textarea name="content" id="id_content" class="form-control" rows="5" required></textarea>
                         </div>
+                        <div class="form-check">
+                            {{ form.is_shared }}
+                            <label for="id_is_shared" class="form-check-label">Notu paylaş</label>
+                        </div>
                         <!-- PDF Yükleme Alanı -->
                         <div class="mb-3">
                             <label for="id_file" class="form-label">PDF Yükleyin:</label>

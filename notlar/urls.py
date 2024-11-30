@@ -23,4 +23,5 @@ urlpatterns = [
         "profile/change-password/", views.change_password, name="change_password"
     ),  # Şifre değiştirme
     path("accounts/login/", LoginView.as_view(), name="login"),
+    path("paylasilan-notlar/", views.shared_notes_view, name="shared_notes"),
 ]

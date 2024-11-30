@@ -1,29 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    Kayıtlı Notlar
+    Paylaşılan Notlar
 {% endblock title %}
 {% block content %}
     <div class="container my-5">
-        <h1 class="text-center mb-4" style="color: #1f5692;">Kayıtlı Notlar</h1>
+        <h1 class="text-center mb-4" style="color: #1f5692;">Paylaşılan Notlar</h1>
         <!-- Notlar Tablosu -->
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Başlık</th>
                     <th scope="col">İçerik</th>
-                    <th scope="col">Paylaşım</th>
+                    <th scope="col">Paylaşan</th>
                     <th scope="col">Dosya</th>
-                    <th scope="col">İşlemler</th>
                 </tr>
             </thead>
             <tbody>
-                {% for not in notlar %}
+                {% for not in shared_notes %}
                     <tr>
                         <td>{{ not.title|truncatechars:20 }}</td>
                         <td>{{ not.content|truncatechars:50 }}</td>
-                        <td>{{ not.is_shared|truncatechars:50 }}</td>
-                        <!-- 50 karaktere kadar kısalt -->
+                        <td>{{ not.user.first_name }} {{ not.user.last_name }}</td>
+                        <!-- Paylaşan Kişi -->
                         <td>
                             {% if not.file %}
                                 <a href="{{ not.file.url }}" target="_blank" class="btn btn-info btn-sm">İndir</a>
@@ -31,24 +30,20 @@
                                 <span class="text-muted">Dosya yok</span>
                             {% endif %}
                         </td>
-                        <td>
-                            <a href="{% url 'update_note' not.pk %}" class="btn btn-warning btn-sm">Düzenle</a>
-                            <a href="{% url 'delete_note' not.pk %}" class="btn btn-danger btn-sm">Sil</a>
-                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">Henüz paylaşılan not yok.</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <!-- Yeni Not Ekle Butonu -->
-        <div class="text-center mt-4">
-            <a href="{% url 'not_ekle' %}" class="btn btn-primary">Yeni Not Ekle</a>
-        </div>
     </div>
-    <div class="d-flex justify-content-center">
-        <img src="{% static 'images/kayitlinotlar.png' %}"
-             width="auto"
+    <div class="d-flex justify-content-center mt-5">
+        <img src="{% static 'images/shared_notes_image.png' %}"
+             width="300"
              height="auto"
-             alt="Not Resmi"
+             alt="Paylaşılan Notlar"
              class="img-fluid rounded">
     </div>
 {% endblock content %}

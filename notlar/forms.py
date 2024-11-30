@@ -9,7 +9,11 @@ from django.contrib.auth.forms import AuthenticationForm
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ["title", "content", "file"]  # Note modelindeki belirtin
+        fields = ["title", "content", "file", "is_shared"]  # Note modelindek
+        widgets = {
+            'is_shared': 
+            forms.CheckboxInput(attrs={'class': 'form-check-input'}),  
+        }
 
 
 class UserRegistrationForm(UserCreationForm):

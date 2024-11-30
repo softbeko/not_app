@@ -19,7 +19,6 @@ def not_ekle(request):
             note = form.save(commit=False)
             note.user = request.user
             note.save()
-            # Başarılı bir şekilde not eklendikten sonra notlar sayfasına yönlendir
             messages.success(request, "Not başarıyla eklendi!")
             return redirect("notlar")  # Notlar sayfasına yönlendir
     else:
@@ -175,7 +174,11 @@ def change_password(request):
 @login_required
 def not_listele(request):
     notlar = Note.objects.filter(user=request.user)  # Kullanıcının notları
-    return render(request, "notlar.html", {"notlar": notlar})
+    shared_notes = Note.objects.filter(is_shared=True)  # ÇALIŞMADI BU SORUN!!!!
+
+    return render(
+        request, "notlar.html", {"notlar": notlar, "shared_notes": shared_notes}
+    )
 
 
 def custom_logout(request):
@@ -191,3 +194,9 @@ def password_change(request):
             update_session_auth_hash(request, form.user)  # Oturum güncelle
             messages.success(request, "Şifreniz başarıyla değiştirildi!")
             return redirect("profile")
+
+
+def shared_notes_view(request):
+    # is_shared=True olan tüm notları al
+    shared_notes = Note.objects.filter(is_shared=True)
+    return render(request, "shared_notes.html", {"shared_notes": shared_notes})
