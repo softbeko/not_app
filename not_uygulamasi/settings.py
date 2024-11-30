@@ -136,3 +136,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 LOGOUT_REDIRECT_URL = '/'
+LANGUAGES = [
+    ('tr', 'Turkish'),  # Türkçe dil seçeneğini ekleyin
+    ('en', 'English'),
+]
+
+LANGUAGE_CODE = 'tr'  # Varsayılan dil Türkçe olsun

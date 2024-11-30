@@ -1,6 +1,8 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
-{% block title %}Kayıtlı Notlar{% endblock %}
+{% block title %}
+    Kayıtlı Notlar
+{% endblock title %}
 {% block content %}
     <div class="container my-5">
         <h1 class="text-center mb-4" style="color: #1f5692;">Kayıtlı Notlar</h1>
@@ -17,8 +19,9 @@
             <tbody>
                 {% for not in notlar %}
                     <tr>
-                        <td>{{ not.title }}</td>
-                        <td>{{ not.content|truncatewords:10 }}</td>
+                        <td>{{ not.title|truncatechars:20 }}</td>
+                        <td>{{ not.content|truncatechars:50 }}</td>
+                        <!-- 50 karaktere kadar kısalt -->
                         <td>
                             {% if not.file %}
                                 <a href="{{ not.file.url }}" target="_blank" class="btn btn-info btn-sm">İndir</a>

@@ -1,26 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Sayfanızın kısa açıklaması.">
-        <meta name="keywords"
-              content="anahtar kelime 1, anahtar kelime 2, anahtar kelime 3, anahtar kelime 4">
-        <title>Sayfa Başlığı</title>
-    </head>
-    <body>
-        <h2>Giriş Yap</h2>
-        <!-- Django mesajlarını burada göster -->
-        {% if messages %}
-            <ul>
-                {% for message in messages %}<li>{{ message }}</li>{% endfor %}
-            </ul>
-        {% endif %}
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="hidden" name="next" value="{{ next }}">
-            <button type="submit">Giriş Yap</button>
-        </form>
-    </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center"
+             style="min-height: 100vh">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{% static 'images/login.png' %}"
+                     width="auto"
+                     height="auto"
+                     alt="Not Resmi"
+                     class="img-fluid rounded shadow-lg rounded-5">
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Giriş Yap</h2>
+                <!-- Hata Mesajları Ekleyelim -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+                    </div>
+                {% endif %}
+                <form method="post" class="card shadow-lg p-4">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="id_username" class="form-label">Kullanıcı Adı</label>
+                        <input type="text"
+                               name="username"
+                               id="id_username"
+                               class="form-control"
+                               required>
+                        <!-- Kullanıcı adı hataları burada gösterilecek -->
+                        {% if form.username.errors %}
+                            <div class="text-danger">
+                                {% for error in form.username.errors %}<p>{{ error }}</p>{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="id_password" class="form-label">Şifre</label>
+                        <input type="password"
+                               name="password"
+                               id="id_password"
+                               class="form-control"
+                               required>
+                        <!-- Şifre hataları burada gösterilecek -->
+                        {% if form.password.errors %}
+                            <div class="text-danger">
+                                {% for error in form.password.errors %}<p>{{ error }}</p>{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <input type="hidden" name="next" value="{{ next }}">
+                    <button type="submit" class="btn btn-primary w-100 py-2">Giriş Yap</button>
+                </form>
+                <div class="text-center mt-3">
+                    <p>
+                        Hesabınız yok mu?
+                        <a href="{% url 'register' %}" class="btn btn-link">Üye Ol</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

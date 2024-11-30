@@ -3,12 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from .models import Note
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ["title", "content", "file"]  # Note modelindeki alanları belirtin
+        fields = ["title", "content", "file"]  # Note modelindeki belirtin
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -60,3 +61,20 @@ class CustomUserChangeForm(UserChangeForm):
         # Her alana 'form-control' sınıfı ekliyoruz
         for field in self.fields.values():
             field.widget.attrs.update({"class": "form-control"})
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ["username", "password"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Formdaki tüm alanlara form-control sınıfını ekle
+        for field in self.fields.values():
+            field.widget.attrs.update(
+                {
+                    "class": "form-control",  # form-control sınıfını burada güncelleyebilirsiniz
+                }
+            )

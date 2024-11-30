@@ -34,6 +34,14 @@
                         <label for="id_email" class="form-label">E-posta</label>
                         {{ form.email }}
                     </div>
+                    <!-- Şifre Linki -->
+                    <div class="form-group mb-4">
+                        <label for="id_password">Şifre</label>
+                        <p>
+                            <a href="{% url 'change_password' %}">Şifrenizi değiştirmek için tıklayın</a>
+                        </p>
+                    </div>
+                    <!-- Güncelleme Butonu -->
                     <button type="submit" class="btn btn-primary w-100 py-2">Güncelle</button>
                 </form>
                 <div class="text-center mt-3">

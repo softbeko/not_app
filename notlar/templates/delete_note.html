@@ -1,21 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Sayfanızın kısa açıklaması.">
-        <meta name="keywords"
-              content="anahtar kelime 1, anahtar kelime 2, anahtar kelime 3, anahtar kelime 4">
-        <title>Sayfa Başlığı</title>
-    </head>
-    <body>
-        <h1>Notu Sil</h1>
-        <p>Bu notu silmek istediğinize emin misiniz?</p>
-        <strong>{{ note.title }}</strong>: {{ note.content }}
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit">Evet, Sil</button>
-        </form>
-        <a href="{% url 'notlar' %}">Geri Dön</a>
-    </body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Notu Sil
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center"
+             style="min-height: 100vh">
+            <!-- Sol Taraf: Resim -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img width="auto"
+                     height="auto"
+                     src="{% static 'images/delete-note.png' %}"
+                     class="img-fluid rounded shadow-lg rounded-5"
+                     alt="Not Silme Resmi">
+            </div>
+            <!-- Sağ Taraf: Silme İşlemi Formu -->
+            <div class="col-md-6">
+                <div class="card shadow-lg p-4">
+                    <h1 class="text-center mb-4" style="color: #1f5692;">Notu Sil</h1>
+                    <p class="text-center">Bu notu silmek istediğinize emin misiniz?</p>
+                    <div class="alert alert-warning text-center">
+                        <strong>{{ note.title }}</strong>: {{ note.content|truncatechars:100 }}
+                    </div>
+                    <form method="post" class="text-center">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger w-100 py-2">Evet, Sil</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'notlar' %}" class="btn btn-secondary">Notlar Sayfasına Geri Dön</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

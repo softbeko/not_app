@@ -1,9 +1,10 @@
+import os
 from .models import Note
 from .forms import NoteForm, UserRegistrationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -13,13 +14,14 @@ from .forms import CustomUserChangeForm
 @login_required
 def not_ekle(request):
     if request.method == "POST":
-        form = NoteForm(request.POST, request.FILES)  # Formdan gelen veriyi al
+        form = NoteForm(request.POST, request.FILES)
         if form.is_valid():
-            note = form.save(commit=False)  # Henüz veritabanına kaydetme
-            note.user = request.user  # Giriş yapan kullanıcıyı ata
-            note.save()  # Veritabanına kaydet
-            notlar = Note.objects.all()
-            return render(request, "not_listele.html", {"notlar": notlar})
+            note = form.save(commit=False)
+            note.user = request.user
+            note.save()
+            # Başarılı bir şekilde not eklendikten sonra notlar sayfasına yönlendir
+            messages.success(request, "Not başarıyla eklendi!")
+            return redirect("notlar")  # Notlar sayfasına yönlendir
     else:
         form = NoteForm()
     return render(request, "not_ekle.html", {"form": form})
@@ -94,10 +96,7 @@ def update_note(request, pk):
         )  # Var olan notu düzenle
         if form.is_valid():
             form.save()
-            notlar = Note.objects.all()
-            return render(
-                request, "not_listele.html", {"notlar": notlar}
-            )  # Notlar sayfasına yönlendir
+            return redirect("notlar")
     else:
         form = NoteForm(instance=note)  # Var olan notun içeriği formda
     return render(request, "update_note.html", {"form": form})
@@ -107,10 +106,18 @@ def update_note(request, pk):
 def delete_note(request, pk):
     # Notu al, ama sadece giriş yapan kullanıcıya aitse
     note = get_object_or_404(Note, pk=pk, user=request.user)
+
     if request.method == "POST":  # Sadece "POST" isteği ile silinebilir
-        note.delete()
-        notlar = Note.objects.all()
-        return render(request, "not_listele.html", {"notlar": notlar})
+        # Eğer notun bir dosyası varsa, dosyayı sil
+        if note.file:
+            file_path = note.file.path
+            if os.path.exists(file_path):
+                os.remove(file_path)  # Dosyayı sil
+
+        note.delete()  # Notu veritabanından sil
+        messages.success(request, "Not ve dosya başarıyla silindi.")
+        return redirect("notlar")  # Notlar sayfasına yönlendir
+
     return render(request, "delete_note.html", {"note": note})
 
 
@@ -165,13 +172,13 @@ def change_password(request):
 
 
 # Not Listele
+@login_required
 def not_listele(request):
-    notlar = Note.objects.all()
-    return render(request, "not_listele.html", {"notlar": notlar})
+    notlar = Note.objects.filter(user=request.user)  # Kullanıcının notları
+    return render(request, "notlar.html", {"notlar": notlar})
 
 
 def custom_logout(request):
-
     logout(request)  # Kullanıcıyı oturumdan çıkar
     return redirect("/")  # Ana sayfaya yönlendir
 
