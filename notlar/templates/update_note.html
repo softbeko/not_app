@@ -43,6 +43,16 @@
                                 <small class="text-muted mt-2 d-block">Mevcut dosya: <a href="{{ form.file.value.url }}" target="_blank">İndir</a></small>
                             {% endif %}
                         </div>
+                        <!--Kategori-->
+                        <div class="mb-3">
+                            <label for="id_kategori" class="form-check-label">Kategoriyi Seçin</label>
+                            {{ form.kategori }}
+                        </div>
+                        <!-- Ders Kategorisi -->
+                        <div class="mb-3">
+                            <label for="id_ders_kategori" class="form-check-label">Dersi Seçin</label>
+                            {{ form.ders_kategori }}
+                        </div>
                         <!-- Paylaşım Durumu (is_shared) -->
                         <div class="mb-3 form-check">
                             <input type="checkbox"
@@ -64,3 +74,7 @@
         </div>
     </div>
 {% endblock content %}
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'js/not_ekle.js' %}"></script>
+{% endblock js %}

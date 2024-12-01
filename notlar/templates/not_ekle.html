@@ -61,12 +61,8 @@
             </div>
         </div>
     </div>
-    {% if messages %}
-        <div class="alert alert-success">
-            {% for message in messages %}<p>{{ message }}</p>{% endfor %}
-        </div>
-    {% endif %}
 {% endblock content %}
 {% block js %}
-<script src="{% static 'js/not_ekle.js' %}"></script>
+    {{ block.super }}
+    <script src="{% static 'js/not_ekle.js' %}"></script>
 {% endblock js %}
