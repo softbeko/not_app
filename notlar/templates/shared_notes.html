@@ -5,13 +5,14 @@
 {% endblock title %}
 {% block content %}
     <div class="container my-5">
-        <h1 class="text-center mb-4" style="color: #1f5692;">Paylaşılan Notlar</h1>
+        <h1 class="text-center mb-4" style="color: #1f5692;">Ders Notları</h1>
         <!-- Notlar Tablosu -->
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Başlık</th>
                     <th scope="col">İçerik</th>
+                    <th scope="col">Ders</th>
                     <th scope="col">Paylaşan</th>
                     <th scope="col">Dosya</th>
                 </tr>
@@ -21,6 +22,7 @@
                     <tr>
                         <td>{{ not.title|truncatechars:20 }}</td>
                         <td>{{ not.content|truncatechars:50 }}</td>
+                        <td>{{ not.ders_kategori|truncatechars:50 }}</td>
                         <td>{{ not.user.first_name }} {{ not.user.last_name }}</td>
                         <!-- Paylaşan Kişi -->
                         <td>

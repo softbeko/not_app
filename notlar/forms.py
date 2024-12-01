@@ -9,10 +9,22 @@ from django.contrib.auth.forms import AuthenticationForm
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ["title", "content", "file", "is_shared"]  # Note modelindek
+        fields = [
+            "title",
+            "content",
+            "file",
+            "is_shared",
+            "kategori",
+            "ders_kategori",
+        ]  # Note modelindek
         widgets = {
-            'is_shared': 
-            forms.CheckboxInput(attrs={'class': 'form-check-input'}),  
+            "is_shared": forms.CheckboxInput(attrs={"class": "form-check-input"}),
+            "kategori": forms.Select(
+                attrs={"class": "form-select"}
+            ),  # Kategori için dropdown menü
+            "ders_kategori": forms.Select(
+                attrs={"class": "form-select"}
+            ),  # Alt kategori için dropdown menü
         }
 
 
@@ -79,6 +91,6 @@ class CustomAuthenticationForm(AuthenticationForm):
         for field in self.fields.values():
             field.widget.attrs.update(
                 {
-                    "class": "form-control",  # form-control sınıfını burada güncelleyebilirsiniz
+                    "class": "form-control",
                 }
             )

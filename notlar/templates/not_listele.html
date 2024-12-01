@@ -12,9 +12,12 @@
                 <tr>
                     <th scope="col">Başlık</th>
                     <th scope="col">İçerik</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Ders Kategorisi</th>
                     <th scope="col">Paylaşım</th>
                     <th scope="col">Dosya</th>
                     <th scope="col">İşlemler</th>
+                    <!-- Ders kategorisi sütunu ekleniyor -->
                 </tr>
             </thead>
             <tbody>
@@ -22,8 +25,20 @@
                     <tr>
                         <td>{{ not.title|truncatechars:20 }}</td>
                         <td>{{ not.content|truncatechars:50 }}</td>
-                        <td>{{ not.is_shared|truncatechars:50 }}</td>
-                        <!-- 50 karaktere kadar kısalt -->
+                        <td>{{ not.get_kategori_display|truncatechars:50 }}</td>
+                        {% if not.kategori == "ders" %}
+                            <td>{{ not.get_ders_kategori_display|truncatechars:50 }}</td>
+                            <!-- Ders kategorisi bilgisi gösteriliyor -->
+                        {% else %}
+                            <td>Ders Seçilmedi</td>
+                        {% endif %}
+                        <td>
+                            {% if not.is_shared %}
+                                +
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
                         <td>
                             {% if not.file %}
                                 <a href="{{ not.file.url }}" target="_blank" class="btn btn-info btn-sm">İndir</a>
