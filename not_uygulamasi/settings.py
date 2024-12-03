@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "notlar",
     "django_extensions",
+    "pwa",
 ]
 
 MIDDLEWARE = [
@@ -135,10 +136,23 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = "/"
 LANGUAGES = [
-    ('tr', 'Turkish'),  # Türkçe dil seçeneğini ekleyin
-    ('en', 'English'),
+    ("tr", "Turkish"),  # Türkçe dil seçeneğini ekleyin
+    ("en", "English"),
 ]
 
-LANGUAGE_CODE = 'tr'  # Varsayılan dil Türkçe olsun
+LANGUAGE_CODE = "tr"  # Varsayılan dil Türkçe olsun
+
+PWA_APP_NAME = "notlar"  # Uygulamanızın adı
+PWA_APP_DESCRIPTION = "My Progressive Web App"  # Açıklama
+PWA_APP_THEME_COLOR = "#0a0a0a"  # Tema rengi
+PWA_APP_BACKGROUND_COLOR = "#ffffff"  # Arka plan rengi
+PWA_APP_ICONS = {
+    "src": "/static/icons/icon-192x192.png",  # Uygulama simgesi
+    "sizes": "192x192",
+    "type": "image/png",
+}
+MIDDLEWARE += [
+    "middleware.detect_mobile.DetectMobileMiddleware",
+]

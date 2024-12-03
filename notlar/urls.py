@@ -3,6 +3,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 from django.contrib.auth.views import LoginView
 from .views import custom_logout
+from django.urls import include
 
 
 urlpatterns = [
@@ -24,4 +25,5 @@ urlpatterns = [
     ),  # Şifre değiştirme
     path("accounts/login/", LoginView.as_view(), name="login"),
     path("paylasilan-notlar/", views.shared_notes_view, name="shared_notes"),
+    path("", include("pwa.urls")),
 ]

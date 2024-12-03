@@ -77,6 +77,8 @@ def login_view(request):
 
 
 def home(request):
+    if request.is_mobile:
+        return render(request, "mobile/index.html")  # Mobil için şablon
     return render(request, "index.html")
 
 
