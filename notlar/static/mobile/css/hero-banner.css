@@ -1,0 +1,37 @@
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 57px;
+    padding: 54px 44px;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .left-content {
+    color: white;
+    text-align: left;
+  }
+  
+  .title {
+    font-size: 20px;
+    color: #CACACA;
+  }
+  
+  .subtitle {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .home-icon {
+    position: absolute;
+    right: 20px; /* Sağda yer alacak */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .home-icon img {
+    object-fit: contain;
+  }
+  

@@ -1,0 +1,11 @@
+/* Sayfa geneli */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Sayfa sağa kaymasını engeller */
+  background: linear-gradient(to bottom right, #001e99, #40fff2);
+  font-family: "Nunito" !important;
+}
+

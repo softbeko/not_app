@@ -1,15 +1,9 @@
-/* Sayfa geneli */
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; /* Sayfa sağa kaymasını engeller */
-  }
+
   
   /* Navbar'ın genel stil ayarları */
   .navbar {
     position: fixed;
+    border-radius: 47px 47px 0px 0px;
     bottom: 0;
     left: 0;
     right: 0;
