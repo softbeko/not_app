@@ -1,0 +1,54 @@
+/* Sayfa geneli */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; /* Sayfa sağa kaymasını engeller */
+  }
+  
+  /* Navbar'ın genel stil ayarları */
+  .navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px; /* Navbar yüksekliği */
+    background-color: #1460B6; /* Navbar arka plan rengi */
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Yükseklik açısından ortalama */
+    z-index: 1000;
+    width: 100%; /* Navbar genişliği %100 */
+    box-sizing: border-box; /* Box modelinin düzgün çalışması */
+    overflow: visible; /* Taşan öğelerin görünmesini sağlar */
+  }
+  
+  /* Navbar içeriği */
+  .navbar-container {
+    display: flex;
+    justify-content: space-evenly; /* Eşit aralıklarla yerleştirir */
+    width: 100%;
+    align-items: center; /* İçeriklerin dikeyde ortalanması */
+    box-sizing: border-box;
+  }
+  
+  /* Navbar öğeleri */
+  .navbar-item {
+    text-align: center;
+    display: inline-block;
+    flex-shrink: 0; /* Öğelerin daralmasını engeller */
+    position: relative;
+  }
+  
+  /* Ortadaki öğeye özel stil (yükseğe taşınacak olan ikon) */
+  .navbar-item:nth-child(3) { /* Ortadaki öğe */
+    transform: translateY(-18px); /* Yukarıya doğru taşınacak mesafe */
+  }
+  
+  /* Resimlerin ortalanması */
+  .navbar-item img {
+    object-fit: contain; /* Resmin orantılı şekilde yerleşmesi */
+  }
+  
