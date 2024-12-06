@@ -1,0 +1,52 @@
+/* Search Div */
+.search-div {
+    position: relative;
+    width: 100%;
+    margin: 20px auto; /* Ortalanmış bir görünüm */
+}
+
+/* Arama Inputu */
+.search-input {
+    width: 100%;
+    padding: 12px 40px 12px 15px; /* Sol ve sağ padding ile ikonu yerleştirecek boşluk */
+    border-radius: 25px; /* Yuvarlak köşeler */
+    border: 2px solid #40fff2; /* Parlak kenar rengi */
+    background-color: #fff;
+    font-size: 15px;
+    outline: none;
+    color: #333;
+    box-sizing: border-box; /* Border ile padding'in toplamını içerik alanına dahil et */
+}
+
+/* Arama Butonu */
+.search-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Sağdan 10px boşluk */
+    transform: translateY(-50%); /* Dikeyde tam ortalamak için */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Arama İkonu */
+.search-icon {
+    width: 25px; /* İkon boyutu */
+    height: 25px;
+    color: #40fff2; /* İkon rengi */
+}
+.additional-btn {
+    padding: 12px 20px;
+    width: 100%; /* Buton genişliğini %100 yap */
+    border-radius: 25px;
+    background-color: #1e0972;
+    box-shadow: 12px 6px 13px rgb(36 52 84 / 50%);
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box; /* Padding'in içeriği etkilememesi için */
+}
+.banner-img{
+    margin-top: 20px;
+}

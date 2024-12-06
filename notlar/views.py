@@ -77,8 +77,11 @@ def login_view(request):
 
 
 def home(request):
+    shared_notes = Note.objects.filter(is_shared=True)
     if request.is_mobile:
-        return render(request, "mobile/index.html")  # Mobil için şablon
+        return render(
+            request, "mobile/index.html", {"shared_notes": shared_notes}
+        )  # Mobil için şablon
     return render(request, "index.html")
 
 

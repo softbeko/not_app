@@ -1,0 +1,82 @@
+/* Başlık stilini ayarlıyoruz */
+.slider-container {
+    margin-bottom: 20px; /* Başlık ve slider arasına boşluk ekleniyor */
+}
+
+.slider-title {
+    font-size: 24px; /* Başlık boyutunu ayarlıyoruz */
+    font-weight: bold; /* Başlık kalın olacak */
+    color: #333; /* Başlık rengini koyu gri yapıyoruz */
+    margin-bottom: 15px; /* Başlık ile slider arasında biraz boşluk */
+    text-align: left; /* Başlığı sola yasla */
+}
+
+
+/* Slider container */
+.slider {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Resimleri slider içinde düzgün yerleştirme */
+.slider .slick-slide {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* Mobilde resimleri küçük yapmak için */
+@media (max-width: 768px) {
+    .slider img {
+        max-width: 200px; /* Mobil cihazlarda resimleri daha da küçük yap */
+    }
+}
+
+/* Slick theme ayarları */
+.slick-prev, .slick-next {
+    font-size: 0;
+    color: transparent;
+    border: none;
+    background: none;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-size: 20px;
+    color: black;
+}
+
+.upload-last-note {
+    display: flex;
+    border: 2px solid #40fff2;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 15px;
+    background: white;
+    font-size: 16px;
+    margin-bottom: 21px;
+}
+
+.left {
+    flex: 1;  /* Sol tarafa genişlik verir */
+    text-align: left;  /* Sol tarafa yaslanır */
+}
+
+.right {
+    text-align: right;  /* Sağ tarafa yaslanır */
+}
+
+.download-btn {
+    padding: 7px 15px;
+    background-color: #1e0972;
+    border-radius: 42px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;}
+
+.download-btn:hover {
+    background-color: #0056b3;  /* Hover olduğunda butonun arka plan rengi değişir */
+    border-color: #0056b3;  /* Hover olduğunda kenarlık rengi değişir */
+}

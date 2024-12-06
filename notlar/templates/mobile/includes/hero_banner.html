@@ -1,0 +1,17 @@
+{% load static %} 
+<div>
+    <img class="banner-img" width="100%" height="auto" src="{% static 'mobile/images/banner.png' %}" alt="search icon"/>
+
+</div>
+<div class="search-div">
+    <input type="text" class="search-input" placeholder="Not Ara...">
+    <button class="search-btn">
+        <img src="{% static 'mobile/images/search_icon_navbar.png' %}" alt="search icon" class="search-icon"/>
+    </button>
+
+</div>
+<button class="additional-btn">
+    <a href="{% url 'not_ekle' %}">
+        Not Ekle
+    </a>
+</button> <!-- Alt buton -->

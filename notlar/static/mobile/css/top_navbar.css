@@ -1,0 +1,32 @@
+/* Genel Konteyner */
+.custom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: #fff;
+  height: 60px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* UploadNote Başlığı */
+.app-title {
+  font-size: 24px; /* Daha büyük font */
+  font-weight: bold; /* Kalın yazı */
+  color: #40fff2; /* Parlak renk */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Hafif gölge efekti */
+}
+
+/* Sağdaki Profil İkonu */
+.profile-icon {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 45px;
+  height: 45px;
+  border: 2px solid #40fff2; /* İkonun çevresine parlak bir kenar */
+  border-radius: 50%;
+}
+

@@ -13,14 +13,6 @@
 
     <!-- style.css dosyasını ekliyoruz -->
     <link rel="stylesheet" href="{% static '/mobile/css/style.css' %}" />
-    <link
-      rel="stylesheet"
-      href="{% static '/mobile/css/bottom-navbar.css' %}"
-    />
-    <link
-    rel="stylesheet"
-    href="{% static '/mobile/css/hero-banner.css' %}"
-  />
 
  
     <!-- Font bağlantıları -->
@@ -30,13 +22,28 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
       rel="stylesheet"
     />
-    <!-- Jquery Linki-->
-    <link rel="manifest" href="{% static 'js/manifest.json' %}" />
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Slick CSS dosyası -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<!-- Slick JS dosyası -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <script src="{% static '/mobile/js/slick_slider.js' %}" /></script>
+
+    <link rel="manifest" href="{% static 'js/manifest.json' %}" />
+
   </head>
   <body>
     <!-- Navbar -->
+    {% include "mobile/components/top_navbar.html" %}
+
     {% include "mobile/components/bottom_navbar.html" %}
     <div class="container">
       {% block content %} 

@@ -1,0 +1,22 @@
+
+{% load static %}
+
+<div class="slider-container">
+    <h2 class="slider-title">Son Paylaşılan Notlar</h2>  <!-- Başlık Eklendi -->
+    <div class="slider">
+        {% for not in shared_notes %}
+            {% if forloop.counter0|divisibleby:4 %}
+                <div class="slider-item">
+            {% endif %}
+            <div class="upload-last-note">
+                <div class="left">{{ not.ders_kategori }}</div>  <!-- Sol tarafa kategori adı ekleniyor -->
+                <div class="right">
+                    <a href="{{ not.file.url }}" target="_blank" class="download-btn">İndir</a>  <!-- Butonun href'ine PDF URL ekleniyor -->
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:4 or forloop.last %}
+                </div>  <!-- 4 öğe gösterildikten sonra, grup kapanıyor -->
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

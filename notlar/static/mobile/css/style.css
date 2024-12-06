@@ -1,4 +1,14 @@
 /* Sayfa geneli */
+@import url('bottom-navbar.css');
+@import url('top_navbar.css');
+@import url('hero_banner.css');
+@import url('make.css');
+@import url('slider_note.css');
+
+*{
+  font-family: "Nunito", sans-serif !important; /* Button içinde de fontu "Nunito" yap */
+
+}
 html, body {
   margin: 0;
   padding: 0;
@@ -6,6 +16,19 @@ html, body {
   height: 100%;
   overflow-x: hidden; /* Sayfa sağa kaymasını engeller */
   background: linear-gradient(to bottom right, #001e99, #40fff2);
-  font-family: "Nunito" !important;
 }
 
+a {
+  text-decoration: none; /* Bağlantı altını çizme */
+  color: inherit; /* Bağlantı rengini, ebeveyn elemanından al */
+  font-family: inherit; /* Yazı tipini değiştirmemek için */
+  font-size: inherit; /* Yazı boyutunu değiştirmemek için */
+}
+.container {
+  width: 100%;
+  max-width: 100%; /* Ekran genişliğini tam kullan */
+  padding-left: 15px; /* Sol boşluk */
+  padding-right: 15px; /* Sağ boşluk */
+  box-sizing: border-box; /* Padding ve border'ları içerik alanına dahil et */
+  margin: 0 auto; /* Ortalamak için */
+}

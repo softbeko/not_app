@@ -1,0 +1,15 @@
+{% load static %}
+<div class="custom-container">
+    <!-- Sol Div -->
+    <div class="custom-left-div">
+        <a href="{% url 'home' %}">
+            <span class="app-title">UploadNote</span>
+        </a>
+    </div>
+
+    <div class="custom-right-div">
+        <a href="{% url 'profile' %}" class="profile-icon">
+            <img src="{% static 'mobile/images/settings-icon.png' %}" alt="profile" class="profile-img"/>
+        </a>
+    </div>
+</div>

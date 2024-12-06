@@ -1,0 +1,37 @@
+/* Card container (Flexbox ile) */
+.card-container {
+    display: flex;
+    justify-content: space-between; /* Card'lar arasına eşit boşluk bırakır */
+    gap: 20px; /* Card'lar arasında boşluk */
+    padding: 20px;
+}
+
+/* Card stili */
+.card {
+    width: 30%; /* Her bir card'ın genişliği, %30 ile üç eşit card oluşturulur */
+    background-color: #afbfff;
+    border-radius: 8px; /* Yuvarlatılmış köşeler */
+    box-shadow: 0 4px 10px rgb(0 0 0);    text-align: center; /* Metinleri ortalamak için */
+    padding: 10px;
+    box-sizing: border-box; /* Padding'in card'ın boyutuna dahil olmasını sağlar */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* İçeriği yatayda ortalar */
+    justify-content: center; /* İçeriği dikeyde ortalar */
+}
+
+/* Resim stili */
+.card-img {
+    width: 100%; /* Resmi card genişliğine uyacak şekilde */
+    border-radius: 8px; /* Resmin kenarlarını yuvarlatmak */
+    object-fit: contain; /* Resmin orantılı şekilde fit olması */
+    max-height: 150px; /* Yüksekliği 150px ile sınırla */
+    margin-bottom: 10px; /* Resim ve yazı arasına boşluk ekle */
+}
+
+/* Yazı stili */
+.card-text {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #333;
+}
