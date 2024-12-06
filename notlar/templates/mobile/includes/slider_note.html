@@ -9,7 +9,7 @@
                 <div class="slider-item">
             {% endif %}
             <div class="upload-last-note">
-                <div class="left">{{ not.ders_kategori }}</div>  <!-- Sol tarafa kategori adı ekleniyor -->
+                <div class="left">{{ not.get_ders_kategori_display }}</div>  <!-- Sol tarafa kategori adı ekleniyor -->
                 <div class="right">
                     <a href="{{ not.file.url }}" target="_blank" class="download-btn">İndir</a>  <!-- Butonun href'ine PDF URL ekleniyor -->
                 </div>
