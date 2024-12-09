@@ -54,6 +54,29 @@
                             <label for="id_file" class="form-label">PDF Yükleyin:</label>
                             <input type="file" name="file" id="id_file" class="form-control">
                         </div>
+<div id="university-department-select">
+    
+                        <div class="mb-3">
+                            <label for="university-select">Üniversite:</label>
+                            <select class="form-select" id="university-select">
+                                <option value="">Bir üniversite seçin</option>
+                                <!-- Dinamik olarak üniversiteler buraya eklenecek -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                        <label for="department-select">Bölüm:</label>
+                        <select  class="form-select"  id="department-select">
+                            <option value="">Bir bölüm seçin</option>
+                            <!-- Dinamik olarak bölümler buraya eklenecek -->
+                        </select>
+                        
+                        <!-- Seçilen Üniversiteye ait Bölümleri Göster -->
+                        <div id="departments-container">
+                            <!-- Bölümler burada dinamik olarak listelenecek -->
+                        </div>
+                    </div>
+                    
+</div>
                         <!-- Kaydet Butonu -->
                         <button type="submit" class="btn btn-primary w-100 py-2">Kaydet</button>
                     </form>

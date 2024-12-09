@@ -9,6 +9,31 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUserChangeForm
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .utils import read_json_file  # JSON okuma fonksiyonunu içe aktar
+
+
+@api_view(["GET"])
+def universities_list(request):
+    data = read_json_file()  # JSON dosyasındaki tüm veriyi al
+    universities = data.get("Okullar", [])  # 'universities' anahtar
+    return Response({"results": universities})  # Sayfalama olmadan tüm veriyi
+
+
+@api_view(["GET"])
+def departments_list(request):
+    university_id = request.GET.get("university_id")  # Seçilen üniver
+    data = read_json_file()  # JSON dosyasındaki tüm veriyi al
+    # Bölümleri doğru şekilde filtreleyelim
+    departments = [
+        department
+        for department in data.get("Bolumler", [])
+        if department["okulKod"] == int(university_id)  # okulKod
+    ]
+
+    # Eğer bölüm bulunamazsa boş liste döndür, varsa bölümleri döndür
+    return Response({"results": departments})  # Filtrelenmiş bölümleri döndür
 
 
 @login_required

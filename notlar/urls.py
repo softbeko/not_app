@@ -4,6 +4,7 @@ from . import views
 from django.contrib.auth.views import LoginView
 from .views import custom_logout
 from django.urls import include
+from .views import universities_list, departments_list
 
 
 urlpatterns = [
@@ -26,4 +27,6 @@ urlpatterns = [
     path("accounts/login/", LoginView.as_view(), name="login"),
     path("paylasilan-notlar/", views.shared_notes_view, name="shared_notes"),
     path("", include("pwa.urls")),
+    path("api/universities/", universities_list, name="universities-list"),
+    path("api/departments/", departments_list, name="departments-list"),
 ]
